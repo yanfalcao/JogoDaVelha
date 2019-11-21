@@ -2,6 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+
 class ShapePlayer extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
@@ -58,9 +59,9 @@ class ShapePlayer extends CustomPainter {
 
   void lineOneVertical(Canvas canvas, Size size){
     var paint = Paint();
-    paint.color = Colors.black;
+    paint.color = Color.fromRGBO(30, 39, 46, 100);
     paint.style = PaintingStyle.stroke;
-    paint.strokeWidth = 2.0;
+    paint.strokeWidth = 5.0;
 
     var path = Path();
     path.moveTo(size.width*0.33, size.height*0.25);
@@ -72,9 +73,9 @@ class ShapePlayer extends CustomPainter {
 
   void lineTwoVertical(Canvas canvas, Size size){
     var paint = Paint();
-    paint.color = Colors.black;
+    paint.color = paint.color = Color.fromRGBO(30, 39, 46, 100);
     paint.style = PaintingStyle.stroke;
-    paint.strokeWidth = 2.0;
+    paint.strokeWidth = 5.0;
 
     var path = Path();
     path.moveTo(size.width*0.66, size.height*0.25);
@@ -88,11 +89,11 @@ class ShapePlayer extends CustomPainter {
     var paint = Paint();
     paint.color = Colors.black;
     paint.style = PaintingStyle.stroke;
-    paint.strokeWidth = 2.0;
+    paint.strokeWidth = 5.0;
 
     var path = Path();
-    path.moveTo(size.width*0.1, size.height*0.33);
-    path.lineTo(size.width*0.9, size.height*0.33);
+    path.moveTo(size.width*0.1, size.height*0.4);
+    path.lineTo(size.width*0.9, size.height*0.4);
     path.close();
 
     canvas.drawPath(path, paint);
@@ -102,11 +103,11 @@ class ShapePlayer extends CustomPainter {
     var paint = Paint();
     paint.color = Colors.black;
     paint.style = PaintingStyle.stroke;
-    paint.strokeWidth = 2.0;
+    paint.strokeWidth = 5.0;
 
     var path = Path();
-    path.moveTo(size.width*0.1, size.height*0.63);
-    path.lineTo(size.width*0.9, size.height*0.63);
+    path.moveTo(size.width*0.1, size.height*0.59);
+    path.lineTo(size.width*0.9, size.height*0.59);
     path.close();
 
     canvas.drawPath(path, paint);
