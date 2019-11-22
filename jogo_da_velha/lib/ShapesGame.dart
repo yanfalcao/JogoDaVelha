@@ -2,8 +2,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'RandomColor.dart';
 
-class ShapePlayer extends CustomPainter {
+
+class ShapePlay extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     //Player One
@@ -111,5 +113,149 @@ class ShapePlayer extends CustomPainter {
     path.close();
 
     canvas.drawPath(path, paint);
+  }
+}
+
+class XO {
+  Widget O1_1(){
+    return Align(
+      alignment: Alignment(-0.69, -0.38),
+      child: _OIcon(),
+    );
+  }
+
+  Widget X1_1(){
+    return Align(
+      alignment: Alignment(-0.72, -0.38),
+      child: _XIcon(),
+    );
+  }
+
+  Widget O2_1(){
+    return Align(
+      alignment: Alignment(0, -0.38),
+      child: _OIcon(),
+    );
+  }
+
+  Widget X2_1(){
+    return Align(
+        alignment: Alignment(0, -0.38),
+        child: _XIcon(),
+    );
+  }
+
+  Widget O3_1(){
+    return Align(
+      alignment: Alignment(0.69, -0.38),
+      child: _OIcon(),
+    );
+  }
+
+  Widget X3_1(){
+    return Align(
+        alignment: Alignment(0.72, -0.38),
+        child: _XIcon(),
+    );
+  }
+
+  Widget O1_2(){
+    return Align(
+      alignment: Alignment(-0.69, 0),
+      child: _OIcon(),
+    );
+  }
+
+  Widget X1_2(){
+    return Align(
+      alignment: Alignment(-0.72, 0),
+      child: _XIcon(),
+    );
+  }
+
+  Widget O2_2(){
+    return Align(
+      alignment: Alignment(0, 0),
+      child: _OIcon(),
+    );
+  }
+
+  Widget X2_2(){
+    return Align(
+      alignment: Alignment(0, 0),
+      child: _XIcon(),
+    );
+  }
+
+  Widget O3_2(){
+    return Align(
+      alignment: Alignment(0.69,0),
+      child: _OIcon(),
+    );
+  }
+
+  Widget X3_2(){
+    return Align(
+      alignment: Alignment(0.72, 0),
+      child: _XIcon(),
+    );
+  }
+
+  Widget O1_3(){
+    return Align(
+      alignment: Alignment(-0.69, 0.38),
+      child: _OIcon(),
+    );
+  }
+
+  Widget X1_3(){
+    return Align(
+      alignment: Alignment(-0.72, 0.38),
+      child: _XIcon(),
+    );
+  }
+
+  Widget O2_3(){
+    return Align(
+      alignment: Alignment(0, 0.38),
+      child: _OIcon(),
+    );
+  }
+
+  Widget X2_3(){
+    return Align(
+      alignment: Alignment(0, 0.38),
+      child: _XIcon(),
+    );
+  }
+
+  Widget O3_3(){
+    return Align(
+      alignment: Alignment(0.69, 0.38),
+      child: _OIcon(),
+    );
+  }
+
+  Widget X3_3(){
+    return Align(
+      alignment: Alignment(0.72, 0.38),
+      child: _XIcon(),
+    );
+  }
+
+  Widget _XIcon(){
+    return Icon(
+      Icons.close,
+      color:  new RandomColor().getColor(),
+      size: 120,
+    );
+  }
+
+  Widget _OIcon(){
+    return Icon(
+      Icons.panorama_fish_eye,
+      color:  new RandomColor().getColor(),
+      size: 100,
+    );
   }
 }

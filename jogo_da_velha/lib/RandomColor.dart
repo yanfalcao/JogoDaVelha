@@ -8,6 +8,7 @@ class RandomColor{
   Color getColor(){
     _initColor();
     return colors.elementAt(new Random().nextInt(23));
+    //return Color.fromRGBO(_getRandow(), _getRandow(), _getRandow(), 100);
   }
 
   int _getRandow(){
