@@ -11,6 +11,10 @@ class RandomColor{
     //return Color.fromRGBO(_getRandow(), _getRandow(), _getRandow(), 100);
   }
 
+  Color getTransparent(){
+    return new Color.fromRGBO(71, 219, 251, 0);
+  }
+
   int _getRandow(){
     return new Random().nextInt(256);
   }

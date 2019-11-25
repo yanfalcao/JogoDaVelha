@@ -2,9 +2,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'RandomColor.dart';
-
-
 class ShapePlay extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
@@ -116,146 +113,54 @@ class ShapePlay extends CustomPainter {
   }
 }
 
-class XO {
-  Widget O1_1(){
-    return Align(
-      alignment: Alignment(-0.69, -0.38),
-      child: _OIcon(),
-    );
+
+
+class ShapePlayerOne extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    var paint = Paint();
+    paint.color = new Color.fromRGBO(71, 219, 251, 100);
+    paint.style = PaintingStyle.fill;
+
+    var path = Path();
+    path.moveTo(0, size.height * 0.05);
+    path.quadraticBezierTo(size.width/2, size.height/5,
+        size.width, size.height*0.05);
+    path.lineTo(size.width, 0);
+    path.lineTo(0, 0);
+    path.close();
+
+    canvas.drawPath(path, paint);
   }
 
-  Widget X1_1(){
-    return Align(
-      alignment: Alignment(-0.72, -0.38),
-      child: _XIcon(),
-    );
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return true;
   }
 
-  Widget O2_1(){
-    return Align(
-      alignment: Alignment(0, -0.38),
-      child: _OIcon(),
-    );
+}
+
+class ShapePlayerTwo extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    var paint = Paint();
+    paint.color = new Color.fromRGBO(71, 219, 251, 100);
+    paint.style = PaintingStyle.fill;
+
+    var path = Path();
+    path.moveTo(0, size.height * 0.95);
+    path.quadraticBezierTo(size.width/2, size.height*0.8,
+        size.width, size.height*0.95);
+    path.lineTo(size.width, size.height);
+    path.lineTo(0, size.height);
+    path.close();
+
+    canvas.drawPath(path, paint);
   }
 
-  Widget X2_1(){
-    return Align(
-        alignment: Alignment(0, -0.38),
-        child: _XIcon(),
-    );
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return true;
   }
 
-  Widget O3_1(){
-    return Align(
-      alignment: Alignment(0.69, -0.38),
-      child: _OIcon(),
-    );
-  }
-
-  Widget X3_1(){
-    return Align(
-        alignment: Alignment(0.72, -0.38),
-        child: _XIcon(),
-    );
-  }
-
-  Widget O1_2(){
-    return Align(
-      alignment: Alignment(-0.69, 0),
-      child: _OIcon(),
-    );
-  }
-
-  Widget X1_2(){
-    return Align(
-      alignment: Alignment(-0.72, 0),
-      child: _XIcon(),
-    );
-  }
-
-  Widget O2_2(){
-    return Align(
-      alignment: Alignment(0, 0),
-      child: _OIcon(),
-    );
-  }
-
-  Widget X2_2(){
-    return Align(
-      alignment: Alignment(0, 0),
-      child: _XIcon(),
-    );
-  }
-
-  Widget O3_2(){
-    return Align(
-      alignment: Alignment(0.69,0),
-      child: _OIcon(),
-    );
-  }
-
-  Widget X3_2(){
-    return Align(
-      alignment: Alignment(0.72, 0),
-      child: _XIcon(),
-    );
-  }
-
-  Widget O1_3(){
-    return Align(
-      alignment: Alignment(-0.69, 0.38),
-      child: _OIcon(),
-    );
-  }
-
-  Widget X1_3(){
-    return Align(
-      alignment: Alignment(-0.72, 0.38),
-      child: _XIcon(),
-    );
-  }
-
-  Widget O2_3(){
-    return Align(
-      alignment: Alignment(0, 0.38),
-      child: _OIcon(),
-    );
-  }
-
-  Widget X2_3(){
-    return Align(
-      alignment: Alignment(0, 0.38),
-      child: _XIcon(),
-    );
-  }
-
-  Widget O3_3(){
-    return Align(
-      alignment: Alignment(0.69, 0.38),
-      child: _OIcon(),
-    );
-  }
-
-  Widget X3_3(){
-    return Align(
-      alignment: Alignment(0.72, 0.38),
-      child: _XIcon(),
-    );
-  }
-
-  Widget _XIcon(){
-    return Icon(
-      Icons.close,
-      color:  new RandomColor().getColor(),
-      size: 120,
-    );
-  }
-
-  Widget _OIcon(){
-    return Icon(
-      Icons.panorama_fish_eye,
-      color:  new RandomColor().getColor(),
-      size: 100,
-    );
-  }
 }

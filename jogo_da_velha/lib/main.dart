@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'RandomColor.dart';
 import 'ShapesGame.dart';
 
 void main() => runApp(MyApp());
@@ -12,38 +13,44 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      home: Container(
-        color: Colors.white,
-        child: CustomPaint(
-          painter: ShapePlay(),
-          child: Players(),
-        ),
-      ),
+      home: GameIteractive(),
     );
   }
 }
 
-class Players extends StatelessWidget {
-  XO xo = new XO();
+class GameIteractiveState extends State<GameIteractive> {
+  RandomColor randColor = RandomColor();
+
+  bool playerTurn = true;
+
+  List<List<int>> matrix = new List<List<int>>();
+  List<List<Color>> matrixColor = new List<List<Color>>();
 
   @override
   Widget build(BuildContext context) {
+    _initMatrix();
     return Material(
       type: MaterialType.transparency,
-      child: Stack(
-        children: <Widget>[
-          playerTwo(),
-          playerOne(),
-          xo.X1_1(),
-          xo.O2_1(),
-          xo.X3_1(),
-          xo.O1_2(),
-          xo.X2_2(),
-          xo.O3_2(),
-          xo.X1_3(),
-          xo.O2_3(),
-          xo.X3_3(),
-        ],
+      child: Container(
+        color: Colors.white,
+        child: CustomPaint(
+          painter: ShapePlay(),
+          child: Stack(
+            children: <Widget>[
+              playerTwo(),
+              playerOne(),
+              _XO1_1(matrix[0][0]),
+              _XO1_2(matrix[0][1]),
+              _XO1_3(matrix[0][2]),
+              _XO2_1(matrix[1][0]),
+              _XO2_2(matrix[1][1]),
+              _XO2_3(matrix[1][2]),
+              _XO3_1(matrix[2][0]),
+              _XO3_2(matrix[2][1]),
+              _XO3_3(matrix[2][2]),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -57,7 +64,7 @@ class Players extends StatelessWidget {
           'Player 2',
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            color: Colors.white,
+            color: playerTurn ? randColor.getTransparent():Colors.white,
             fontSize: 65,
           ),
         ),
@@ -72,10 +79,220 @@ class Players extends StatelessWidget {
         'Player 1',
         style: TextStyle(
           fontWeight: FontWeight.bold,
-          color: Colors.white,
+          color: playerTurn ? Colors.white:randColor.getTransparent(),
           fontSize: 65,
         ),
       ),
     );
   }
+
+  void _toggleTurn(int x, int y) {
+      if(playerTurn){
+        if(matrix[x][y] == 0){
+          matrix[x][y] = 1;
+          matrixColor[x][y] = randColor.getColor();
+          playerTurn = false;
+        }
+      }else{
+        if(matrix[x][y] == 0){
+          matrix[x][y] = 2;
+          matrixColor[x][y] = randColor.getColor();
+          playerTurn = true;
+        }
+      }
+  }
+
+  void _initMatrix(){
+    for (var i = 0; i < 3; i++) {
+      matrix.add(new List<int>());
+      matrixColor.add(new List<Color>());
+
+      for (var j = 0; j < 3; j++) {
+        matrix[i].add(0);
+        matrixColor[i].add(randColor.getTransparent());
+      }
+    }
+  }
+
+  Widget _XO1_1(int state){
+    Icon icon = state == 1 ? Icon(Icons.close):Icon(Icons.panorama_fish_eye);
+    double size = state == 1 ? 120:100;
+    double x = state == 1 ? -0.72:-0.69;
+
+    return Align(
+      alignment: Alignment(x, -0.38),
+      child: IconButton(
+        icon: icon,
+        color: matrixColor[0][0],
+        iconSize: size,
+        onPressed: (){
+          setState(() {
+            _toggleTurn(0, 0);
+          });
+        },
+      ),
+    );
+  }
+
+  Widget _XO1_2(int state){
+    Icon icon = state == 1 ? Icon(Icons.close):Icon(Icons.panorama_fish_eye);
+    double size = state == 1 ? 120:100;
+
+    return Align(
+      alignment: Alignment(0, -0.38),
+      child: IconButton(
+        icon: icon,
+        color: matrixColor[0][1],
+        iconSize: size,
+        onPressed: (){
+          setState(() {
+            _toggleTurn(0, 1);
+          });
+        },
+      ),
+    );
+  }
+
+  Widget _XO1_3(int state){
+    Icon icon = state == 1 ? Icon(Icons.close):Icon(Icons.panorama_fish_eye);
+    double size = state == 1 ? 120:100;
+    double x = state == 1 ? 0.72:0.69;
+
+    return Align(
+      alignment: Alignment(x, -0.38),
+      child: IconButton(
+        icon: icon,
+        color: matrixColor[0][2],
+        iconSize: size,
+        onPressed: (){
+          setState(() {
+            _toggleTurn(0, 2);
+          });
+        },
+      ),
+    );
+  }
+
+  Widget _XO2_1(int state){
+    Icon icon = state == 1 ? Icon(Icons.close):Icon(Icons.panorama_fish_eye);
+    double size = state == 1 ? 120:100;
+    double x = state == 1 ? -0.72:-0.69;
+
+    return Align(
+      alignment: Alignment(x, 0),
+      child: IconButton(
+        icon: icon,
+        color: matrixColor[1][0],
+        iconSize: size,
+        onPressed: (){
+          setState(() {
+            _toggleTurn(1, 0);
+          });
+        },
+      ),
+    );
+  }
+
+  Widget _XO2_2(int state){
+    Icon icon = state == 1 ? Icon(Icons.close):Icon(Icons.panorama_fish_eye);
+    double size = state == 1 ? 120:100;
+
+    return Align(
+      alignment: Alignment(0, 0),
+      child: IconButton(
+        icon: icon,
+        color: matrixColor[1][1],
+        iconSize: size,
+        onPressed: (){
+          setState(() {
+            _toggleTurn(1, 1);
+          });
+        },
+      ),
+    );
+  }
+
+  Widget _XO2_3(int state){
+    Icon icon = state == 1 ? Icon(Icons.close):Icon(Icons.panorama_fish_eye);
+    double size = state == 1 ? 120:100;
+    double x = state == 1 ? 0.72:0.69;
+
+    return Align(
+      alignment: Alignment(x, 0),
+      child: IconButton(
+        icon: icon,
+        color: matrixColor[1][2],
+        iconSize: size,
+        onPressed: (){
+          setState(() {
+            _toggleTurn(1, 2);
+          });
+        },
+      ),
+    );
+  }
+
+  Widget _XO3_1(int state){
+    Icon icon = state == 1 ? Icon(Icons.close):Icon(Icons.panorama_fish_eye);
+    double size = state == 1 ? 120:100;
+    double x = state == 1 ? -0.72:-0.69;
+
+    return Align(
+      alignment: Alignment(x, 0.38),
+      child: IconButton(
+        icon: icon,
+        color: matrixColor[2][0],
+        iconSize: size,
+        onPressed: (){
+          setState(() {
+            _toggleTurn(2, 0);
+          });
+        },
+      ),
+    );
+  }
+
+  Widget _XO3_2(int state){
+    Icon icon = state == 1 ? Icon(Icons.close):Icon(Icons.panorama_fish_eye);
+    double size = state == 1 ? 120:100;
+
+    return Align(
+      alignment: Alignment(0, 0.38),
+      child: IconButton(
+        icon: icon,
+        color: matrixColor[2][1],
+        iconSize: size,
+        onPressed: (){
+          setState(() {
+            _toggleTurn(2, 1);
+          });
+        },
+      ),
+    );
+  }
+
+  Widget _XO3_3(int state){
+    Icon icon = state == 1 ? Icon(Icons.close):Icon(Icons.panorama_fish_eye);
+    double size = state == 1 ? 120:100;
+    double x = state == 1 ? 0.72:0.69;
+
+    return Align(
+      alignment: Alignment(x, 0.38),
+      child: IconButton(
+        icon: icon,
+        color:  matrixColor[2][2],
+        iconSize: size,
+        onPressed: (){
+          setState(() {
+            _toggleTurn(2, 2);
+          });
+        },
+      ),
+    );
+  }
+}
+
+class GameIteractive extends StatefulWidget{
+  @override
+  State<StatefulWidget> createState() => GameIteractiveState();
 }
