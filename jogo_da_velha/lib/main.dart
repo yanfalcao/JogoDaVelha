@@ -18,13 +18,30 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class GameIteractiveState extends State<GameIteractive> {
+class GameIteractiveState extends State<GameIteractive> with SingleTickerProviderStateMixin{
   RandomColor randColor = RandomColor();
+  double _fraction;
 
   bool playerTurn = true;
 
   List<List<int>> matrix = new List<List<int>>();
   List<List<Color>> matrixColor = new List<List<Color>>();
+
+  Animation<double> animation;
+
+  @override
+  void initState() {
+    super.initState();
+    var controller = AnimationController(
+      duration: Duration(milliseconds: 5000), vsync: this);
+    animation = Tween(begin: 0.0, end: 1.0).animate(controller)
+      ..addListener(() {
+        setState(() {
+          _fraction = animation.value;
+        });
+      });
+    controller.forward();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +51,7 @@ class GameIteractiveState extends State<GameIteractive> {
       child: Container(
         color: Colors.white,
         child: CustomPaint(
-          painter: ShapePlay(),
+          painter: ShapePlay(_fraction),
           child: Stack(
             children: <Widget>[
               playerTwo(),
@@ -79,7 +96,7 @@ class GameIteractiveState extends State<GameIteractive> {
         'Player 1',
         style: TextStyle(
           fontWeight: FontWeight.bold,
-          color: playerTurn ? Colors.white:randColor.getTransparent(),
+          color: playerTurn && _fraction == 1 ? Colors.white:randColor.getTransparent(),
           fontSize: 65,
         ),
       ),
