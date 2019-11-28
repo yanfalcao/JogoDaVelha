@@ -57,12 +57,12 @@ class ShapePlay extends CustomPainter {
     var path = Path();
     path.moveTo(
         0,
-        size.height * 0.95 / _fraction);
+        size.height - size.height*0.05 * _fraction);
     path.quadraticBezierTo(
         size.width/2,
-        size.height*0.8 / _fraction,
+        size.height - size.height*0.2 * _fraction,
         size.width,
-        size.height * 0.95 / _fraction);
+        size.height - size.height*0.05 * _fraction);
     path.lineTo(size.width, size.height);
     path.lineTo(0, size.height);
     path.close();
@@ -108,56 +108,4 @@ class ShapePlay extends CustomPainter {
       ..style = PaintingStyle.stroke
       ..strokeWidth = 5.5;
   }
-}
-
-
-
-class ShapePlayerOne extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    var paint = Paint();
-    paint.color = new Color.fromRGBO(71, 219, 251, 100);
-    paint.style = PaintingStyle.fill;
-
-    var path = Path();
-    path.moveTo(0, size.height * 0.05);
-    path.quadraticBezierTo(size.width/2, size.height/5,
-        size.width, size.height*0.05);
-    path.lineTo(size.width, 0);
-    path.lineTo(0, 0);
-    path.close();
-
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    return true;
-  }
-
-}
-
-class ShapePlayerTwo extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    var paint = Paint();
-    paint.color = new Color.fromRGBO(71, 219, 251, 100);
-    paint.style = PaintingStyle.fill;
-
-    var path = Path();
-    path.moveTo(0, size.height * 0.95);
-    path.quadraticBezierTo(size.width/2, size.height*0.8,
-        size.width, size.height*0.95);
-    path.lineTo(size.width, size.height);
-    path.lineTo(0, size.height);
-    path.close();
-
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    return true;
-  }
-
 }

@@ -1,82 +1,63 @@
 class Winner {
-  static final String ONE_WIN = "one_win";
-  static final String TWO_WIN = "two_win";
+  static final String LINE_ONE_HORIZONTAL = "line_one_horizontal";
+  static final String LINE_TWO_HORIZONTAL = "line_two_horizontal";
+  static final String LINE_THREE_HORIZONTAL = "line_three_horizontal";
+  static final String LINE_ONE_VERTICAL = "line_one_vertical";
+  static final String LINE_TWO_VERTICAL = "line_two_vertical";
+  static final String LINE_THREE_VERTICAL = "line_three_vertical";
+  static final String DIAGONAL = "diagonal";
+  static final String ANTI_DIAGONAL = "anti_diagonal";
   static final String CONTINUE = "continue";
   static final String NOBODY = "nobody";
-  List<List<int>> _magicSquare;
-
-
-  Winner(){
-    _magicSquare = List<List<int>>();
-    _magicSquare.add(List<int>());
-    _magicSquare[0].add(8);
-    _magicSquare[0].add(1);
-    _magicSquare[0].add(6);
-    _magicSquare.add(List<int>());
-    _magicSquare[0].add(3);
-    _magicSquare[0].add(5);
-    _magicSquare[0].add(7);
-    _magicSquare.add(List<int>());
-    _magicSquare[0].add(4);
-    _magicSquare[0].add(9);
-    _magicSquare[0].add(2);
-  }
 
   String checkWinner(List<List<int>> matrix){
-    int lineHorizontalX;
-    int lineVerticalX;
-    int lineHorizontalO;
-    int lineVerticalO;
-    int trasverssalX = 0;
-    int transverssalO = 0;
-    bool hasEmptySpace = false;
+    bool hasEmpty = false;
 
-    for(int i=0; i < 3; i++){
-      lineHorizontalX = 0;
-      lineVerticalX = 0;
-      lineHorizontalO = 0;
-      lineVerticalO = 0;
+      if(matrix[0][0] == 1 && matrix[0][1] == 1 && matrix[0][2] == 1)
+        return LINE_ONE_HORIZONTAL;
+      if(matrix[1][0] == 1 && matrix[1][1] == 1 && matrix[1][2] == 1)
+        return LINE_TWO_HORIZONTAL;
+      if(matrix[2][0] == 1 && matrix[2][1] == 1 && matrix[2][2] == 1)
+        return LINE_THREE_HORIZONTAL;
+      if(matrix[0][0] == 1 && matrix[1][0] == 1 && matrix[2][0] == 1)
+        return LINE_ONE_VERTICAL;
+      if(matrix[0][1] == 1 && matrix[1][1] == 1 && matrix[2][1] == 1)
+        return LINE_TWO_VERTICAL;
+      if(matrix[0][2] == 1 && matrix[1][2] == 1 && matrix[2][2] == 1)
+        return LINE_THREE_VERTICAL;
+      if(matrix[0][0] == 1 && matrix[1][1] == 1 && matrix[2][2] == 1)
+        return DIAGONAL;
+      if(matrix[2][0] == 1 && matrix[1][1] == 1 && matrix[0][2] == 1)
+        return ANTI_DIAGONAL;
 
-      for(int j=0; j < 3; j++){
-        if(matrix[i][j] == 0)
-          hasEmptySpace = true;
-        if(i == j){
-          if(matrix[i][j] == 1)
-            trasverssalX += matrix[i][j];
-          else if(matrix[i][j] == 2)
-            transverssalO += matrix[i][j];
-        }
-        if(matrix[i][j] == 1)
-          lineHorizontalX += _magicSquare[i][j];
-        if(matrix[i][j] == 1)
-          lineHorizontalO += _magicSquare[i][j];
-        if(matrix[j][i] == 2)
-          lineVerticalX += _magicSquare[j][i];
-        if(matrix[j][i] == 2)
-          lineVerticalO += _magicSquare[j][i];
-      }
+      if(matrix[0][0] == 2 && matrix[0][1] == 2 && matrix[0][2] == 2)
+        return LINE_ONE_HORIZONTAL;
+      if(matrix[1][0] == 2 && matrix[1][1] == 2 && matrix[1][2] == 2)
+        return LINE_TWO_HORIZONTAL;
+      if(matrix[2][0] == 2 && matrix[2][1] == 2 && matrix[2][2] == 2)
+        return LINE_THREE_HORIZONTAL;
+      if(matrix[0][0] == 2 && matrix[1][0] == 2 && matrix[2][0] == 2)
+        return LINE_ONE_VERTICAL;
+      if(matrix[0][1] == 2 && matrix[1][1] == 2 && matrix[2][1] == 2)
+        return LINE_TWO_VERTICAL;
+      if(matrix[0][2] == 2 && matrix[1][2] == 2 && matrix[2][2] == 2)
+        return LINE_THREE_VERTICAL;
+      if(matrix[0][0] == 2 && matrix[1][1] == 2 && matrix[2][2] == 2)
+        return DIAGONAL;
+      if(matrix[2][0] == 2 && matrix[1][1] == 2 && matrix[0][2] == 2)
+        return ANTI_DIAGONAL;
 
-      if(lineHorizontalX == 15)
-        return ONE_WIN;
-      else if(lineHorizontalO == 15)
-        return TWO_WIN;
-      else if(lineVerticalX == 15)
-        return ONE_WIN;
-      else if(lineVerticalO == 15)
-        return TWO_WIN;
-    }
+    if(matrix[0][0] == 0 || matrix[0][1] == 0 || matrix[0][2] == 0)
+      hasEmpty = true;
+    if(matrix[1][0] == 0 || matrix[1][1] == 0 || matrix[1][2] == 0)
+      hasEmpty = true;
+    if(matrix[2][0] == 0 || matrix[2][1] == 0 || matrix[2][2] == 0)
+      hasEmpty = true;
 
-    if(trasverssalX == 15)
-      return ONE_WIN;
-    if(transverssalO == 15)
-      return TWO_WIN;
-    if(matrix[0][2] == 1 && matrix[1][1] == 1 && matrix[2][0] == 1)
-      return ONE_WIN;
-    if(matrix[0][2] == 2 && matrix[1][1] == 2 && matrix[2][0] == 2)
-      return TWO_WIN;
-    if(hasEmptySpace)
+    if(hasEmpty)
       return CONTINUE;
     else
       return NOBODY;
+
   }
 }

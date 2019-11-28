@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:jogo_da_velha/players/Player.dart';
 import 'RandomColor.dart';
 import 'ShapesGame.dart';
+import 'Win.dart';
 
 void main() => runApp(MyApp());
 
@@ -20,20 +22,21 @@ class MyApp extends StatelessWidget {
 
 class GameIteractiveState extends State<GameIteractive> with SingleTickerProviderStateMixin{
   RandomColor randColor = RandomColor();
-  double _fraction;
 
   bool playerTurn = true;
+  String _statusGame;
 
   List<List<int>> matrix = new List<List<int>>();
   List<List<Color>> matrixColor = new List<List<Color>>();
 
   Animation<double> animation;
+  double _fraction;
 
   @override
   void initState() {
     super.initState();
     var controller = AnimationController(
-      duration: Duration(milliseconds: 5000), vsync: this);
+      duration: Duration(milliseconds: 3000), vsync: this);
     animation = Tween(begin: 0.0, end: 1.0).animate(controller)
       ..addListener(() {
         setState(() {
@@ -54,8 +57,8 @@ class GameIteractiveState extends State<GameIteractive> with SingleTickerProvide
           painter: ShapePlay(_fraction),
           child: Stack(
             children: <Widget>[
-              playerTwo(),
-              playerOne(),
+              PlayerTwoText().paint(playerTurn),
+              PlayerOneText().paint(playerTurn, _fraction),
               _XO1_1(matrix[0][0]),
               _XO1_2(matrix[0][1]),
               _XO1_3(matrix[0][2]),
@@ -67,37 +70,6 @@ class GameIteractiveState extends State<GameIteractive> with SingleTickerProvide
               _XO3_3(matrix[2][2]),
             ],
           ),
-        ),
-      ),
-    );
-  }
-
-  Widget playerTwo(){
-    return Align(
-      alignment: Alignment(0, -0.97),
-      child: Transform.rotate(
-        angle: - 3.1415927,
-        child: Text(
-          'Player 2',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: playerTurn ? randColor.getTransparent():Colors.white,
-            fontSize: 65,
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget playerOne(){
-    return Align(
-      alignment: Alignment(0, 0.97),
-      child: Text(
-        'Player 1',
-        style: TextStyle(
-          fontWeight: FontWeight.bold,
-          color: playerTurn && _fraction == 1 ? Colors.white:randColor.getTransparent(),
-          fontSize: 65,
         ),
       ),
     );
@@ -117,6 +89,7 @@ class GameIteractiveState extends State<GameIteractive> with SingleTickerProvide
           playerTurn = true;
         }
       }
+      _statusGame = Winner().checkWinner(matrix);
   }
 
   void _initMatrix(){
