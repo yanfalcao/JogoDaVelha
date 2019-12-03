@@ -24,25 +24,61 @@ class GameIteractiveState extends State<GameIteractive> with SingleTickerProvide
   RandomColor randColor = RandomColor();
 
   bool playerTurn = true;
-  String _statusGame;
+  String _statusGame = Winner.CONTINUE;
+  Winner winner = Winner();
 
   List<List<int>> matrix = new List<List<int>>();
   List<List<Color>> matrixColor = new List<List<Color>>();
 
-  Animation<double> animation;
+  Animation<double> animationOut;
+  Animation<double> animationOpacity;
+  Animation<double> animationSize;
+  AnimationController controller;
   double _fraction;
+  double _fractionOpacity;
+  double _fractionSize;
 
   @override
   void initState() {
     super.initState();
-    var controller = AnimationController(
-      duration: Duration(milliseconds: 3000), vsync: this);
-    animation = Tween(begin: 0.0, end: 1.0).animate(controller)
+    controller = AnimationController(
+      duration: Duration(milliseconds: 2300), vsync: this);
+
+    animationOut = Tween(
+        begin: 0.0,
+        end: 1.0)
+        .animate(controller)
       ..addListener(() {
         setState(() {
-          _fraction = animation.value;
+          if(_statusGame == Winner.CONTINUE)
+            _fraction = animationOut.value;
         });
       });
+
+    animationOpacity = Tween<double>(
+        begin: 1.0,
+        end: 0.0)
+        .animate(CurvedAnimation(
+        parent: controller,
+        curve: Interval(0.0, 0.4, curve: Curves.easeOut)))
+      ..addListener(() {
+        setState(() {
+          _fractionOpacity = animationOpacity.value;
+        });
+      });
+
+    animationSize = Tween<double>(
+        begin: 100.0,
+        end: 120.0)
+        .animate(CurvedAnimation(
+        parent: controller,
+        curve: Interval(0.0, 0.6, curve: Curves.elasticInOut)))
+      ..addListener(() {
+        setState(() {
+          _fractionSize = animationSize.value;
+        });
+      });
+
     controller.forward();
   }
 
@@ -89,7 +125,11 @@ class GameIteractiveState extends State<GameIteractive> with SingleTickerProvide
           playerTurn = true;
         }
       }
-      _statusGame = Winner().checkWinner(matrix);
+      _statusGame = winner.checkWinner(matrix);
+      if(_statusGame != Winner.CONTINUE){
+        controller.reset();
+        controller.forward();
+      }
   }
 
   void _initMatrix(){
@@ -109,6 +149,13 @@ class GameIteractiveState extends State<GameIteractive> with SingleTickerProvide
     double size = state == 1 ? 120:100;
     double x = state == 1 ? -0.72:-0.69;
 
+    if(StatusAnimationXO.getStatus(_statusGame, 11) == StatusAnimationXO.OPACITY){
+      if(matrixColor[0][0].value != randColor.getTransparent().value)
+        matrixColor[0][0] = randColor.getEditTransparent(_fractionOpacity);
+    }else if(StatusAnimationXO.getStatus(_statusGame, 11) == StatusAnimationXO.SIZE_OUT){
+      size = state == 1 ? _fractionSize + 20 : _fractionSize;
+    }
+
     return Align(
       alignment: Alignment(x, -0.38),
       child: IconButton(
@@ -127,6 +174,13 @@ class GameIteractiveState extends State<GameIteractive> with SingleTickerProvide
   Widget _XO1_2(int state){
     Icon icon = state == 1 ? Icon(Icons.close):Icon(Icons.panorama_fish_eye);
     double size = state == 1 ? 120:100;
+
+    if(StatusAnimationXO.getStatus(_statusGame, 12) == StatusAnimationXO.OPACITY){
+      if(matrixColor[0][1].value != randColor.getTransparent().value)
+        matrixColor[0][1] = randColor.getEditTransparent(_fractionOpacity);
+    }else if(StatusAnimationXO.getStatus(_statusGame, 12) == StatusAnimationXO.SIZE_OUT){
+      size = state == 1 ? _fractionSize + 20 : _fractionSize;
+    }
 
     return Align(
       alignment: Alignment(0, -0.38),
@@ -148,6 +202,13 @@ class GameIteractiveState extends State<GameIteractive> with SingleTickerProvide
     double size = state == 1 ? 120:100;
     double x = state == 1 ? 0.72:0.69;
 
+    if(StatusAnimationXO.getStatus(_statusGame, 13) == StatusAnimationXO.OPACITY){
+      if(matrixColor[0][2].value != randColor.getTransparent().value)
+        matrixColor[0][2] = randColor.getEditTransparent(_fractionOpacity);
+    }else if(StatusAnimationXO.getStatus(_statusGame, 13) == StatusAnimationXO.SIZE_OUT){
+      size = state == 1 ? _fractionSize + 20 : _fractionSize;
+    }
+
     return Align(
       alignment: Alignment(x, -0.38),
       child: IconButton(
@@ -168,6 +229,13 @@ class GameIteractiveState extends State<GameIteractive> with SingleTickerProvide
     double size = state == 1 ? 120:100;
     double x = state == 1 ? -0.72:-0.69;
 
+    if(StatusAnimationXO.getStatus(_statusGame, 21) == StatusAnimationXO.OPACITY){
+      if(matrixColor[1][0].value != randColor.getTransparent().value)
+        matrixColor[1][0] = randColor.getEditTransparent(_fractionOpacity);
+    }else if(StatusAnimationXO.getStatus(_statusGame, 21) == StatusAnimationXO.SIZE_OUT){
+      size = state == 1 ? _fractionSize + 20 : _fractionSize;
+    }
+
     return Align(
       alignment: Alignment(x, 0),
       child: IconButton(
@@ -186,6 +254,13 @@ class GameIteractiveState extends State<GameIteractive> with SingleTickerProvide
   Widget _XO2_2(int state){
     Icon icon = state == 1 ? Icon(Icons.close):Icon(Icons.panorama_fish_eye);
     double size = state == 1 ? 120:100;
+
+    if(StatusAnimationXO.getStatus(_statusGame, 22) == StatusAnimationXO.OPACITY){
+      if(matrixColor[1][1].value != randColor.getTransparent().value)
+        matrixColor[1][1] = randColor.getEditTransparent(_fractionOpacity);
+    }else if(StatusAnimationXO.getStatus(_statusGame, 22) == StatusAnimationXO.SIZE_OUT){
+      size = state == 1 ? _fractionSize + 20 : _fractionSize;
+    }
 
     return Align(
       alignment: Alignment(0, 0),
@@ -207,6 +282,13 @@ class GameIteractiveState extends State<GameIteractive> with SingleTickerProvide
     double size = state == 1 ? 120:100;
     double x = state == 1 ? 0.72:0.69;
 
+    if(StatusAnimationXO.getStatus(_statusGame, 23) == StatusAnimationXO.OPACITY){
+      if(matrixColor[1][2].value != randColor.getTransparent().value)
+        matrixColor[1][2] = randColor.getEditTransparent(_fractionOpacity);
+    }else if(StatusAnimationXO.getStatus(_statusGame, 23) == StatusAnimationXO.SIZE_OUT){
+      size = state == 1 ? _fractionSize + 20 : _fractionSize;
+    }
+
     return Align(
       alignment: Alignment(x, 0),
       child: IconButton(
@@ -227,6 +309,13 @@ class GameIteractiveState extends State<GameIteractive> with SingleTickerProvide
     double size = state == 1 ? 120:100;
     double x = state == 1 ? -0.72:-0.69;
 
+    if(StatusAnimationXO.getStatus(_statusGame, 31) == StatusAnimationXO.OPACITY){
+      if(matrixColor[2][0].value != randColor.getTransparent().value)
+        matrixColor[2][0] = randColor.getEditTransparent(_fractionOpacity);
+    }else if(StatusAnimationXO.getStatus(_statusGame, 31) == StatusAnimationXO.SIZE_OUT){
+      size = state == 1 ? _fractionSize + 20 : _fractionSize;
+    }
+
     return Align(
       alignment: Alignment(x, 0.38),
       child: IconButton(
@@ -245,6 +334,13 @@ class GameIteractiveState extends State<GameIteractive> with SingleTickerProvide
   Widget _XO3_2(int state){
     Icon icon = state == 1 ? Icon(Icons.close):Icon(Icons.panorama_fish_eye);
     double size = state == 1 ? 120:100;
+
+    if(StatusAnimationXO.getStatus(_statusGame, 32) == StatusAnimationXO.OPACITY){
+      if(matrixColor[2][1].value != randColor.getTransparent().value)
+        matrixColor[2][1] = randColor.getEditTransparent(_fractionOpacity);
+    }else if(StatusAnimationXO.getStatus(_statusGame, 32) == StatusAnimationXO.SIZE_OUT){
+      size = state == 1 ? _fractionSize + 20 : _fractionSize;
+    }
 
     return Align(
       alignment: Alignment(0, 0.38),
@@ -265,6 +361,13 @@ class GameIteractiveState extends State<GameIteractive> with SingleTickerProvide
     Icon icon = state == 1 ? Icon(Icons.close):Icon(Icons.panorama_fish_eye);
     double size = state == 1 ? 120:100;
     double x = state == 1 ? 0.72:0.69;
+
+    if(StatusAnimationXO.getStatus(_statusGame, 33) == StatusAnimationXO.OPACITY){
+      if(matrixColor[2][2].value != randColor.getTransparent().value)
+        matrixColor[2][2] = randColor.getEditTransparent(_fractionOpacity);
+    }else if(StatusAnimationXO.getStatus(_statusGame, 33) == StatusAnimationXO.SIZE_OUT){
+      size = state == 1 ? _fractionSize + 20 : _fractionSize;
+    }
 
     return Align(
       alignment: Alignment(x, 0.38),

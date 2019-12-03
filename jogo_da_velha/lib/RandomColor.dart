@@ -15,6 +15,10 @@ class RandomColor{
     return new Color.fromRGBO(71, 219, 251, 0);
   }
 
+  Color getEditTransparent(double visibility){
+    return new Color.fromRGBO(71, 219, 251, visibility);
+  }
+
   int _getRandow(){
     return new Random().nextInt(256);
   }

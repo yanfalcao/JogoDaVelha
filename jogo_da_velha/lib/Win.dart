@@ -61,3 +61,86 @@ class Winner {
 
   }
 }
+
+class StatusAnimationXO{
+  static final String CONTINUE = "continue";
+  static final String OPACITY = "opacity";
+  static final String SIZE_OUT = "size_out";
+
+  static String getStatus(String status, int xo){
+    if(status == Winner.CONTINUE)
+      return CONTINUE;
+
+    switch(xo){
+      case 11:
+        if(status == Winner.LINE_ONE_VERTICAL ||
+            status == Winner.LINE_ONE_HORIZONTAL ||
+            status == Winner.DIAGONAL)
+          return SIZE_OUT;
+        else
+          return OPACITY;
+        break;
+      case 12:
+        if(status == Winner.LINE_TWO_VERTICAL ||
+            status == Winner.LINE_ONE_HORIZONTAL)
+          return SIZE_OUT;
+        else
+          return OPACITY;
+        break;
+      case 13:
+        if(status == Winner.LINE_THREE_VERTICAL ||
+            status == Winner.LINE_ONE_HORIZONTAL ||
+            status == Winner.ANTI_DIAGONAL)
+          return SIZE_OUT;
+        else
+          return OPACITY;
+        break;
+      case 21:
+        if(status == Winner.LINE_ONE_VERTICAL ||
+            status == Winner.LINE_TWO_HORIZONTAL)
+          return SIZE_OUT;
+        else
+          return OPACITY;
+        break;
+      case 22:
+        if(status == Winner.LINE_TWO_VERTICAL ||
+            status == Winner.LINE_TWO_HORIZONTAL ||
+            status == Winner.DIAGONAL ||
+            status == Winner.ANTI_DIAGONAL)
+          return SIZE_OUT;
+        else
+          return OPACITY;
+        break;
+      case 23:
+        if(status == Winner.LINE_THREE_VERTICAL ||
+            status == Winner.LINE_TWO_HORIZONTAL)
+          return SIZE_OUT;
+        else
+          return OPACITY;
+        break;
+      case 31:
+        if(status == Winner.LINE_ONE_VERTICAL ||
+            status == Winner.LINE_THREE_HORIZONTAL ||
+            status == Winner.ANTI_DIAGONAL)
+          return SIZE_OUT;
+        else
+          return OPACITY;
+        break;
+      case 32:
+        if(status == Winner.LINE_TWO_VERTICAL ||
+            status == Winner.LINE_THREE_HORIZONTAL)
+          return SIZE_OUT;
+        else
+          return OPACITY;
+        break;
+      case 33:
+        if(status == Winner.LINE_THREE_VERTICAL ||
+            status == Winner.LINE_THREE_HORIZONTAL ||
+            status == Winner.DIAGONAL)
+          return SIZE_OUT;
+        else
+          return OPACITY;
+        break;
+    }
+  }
+}
