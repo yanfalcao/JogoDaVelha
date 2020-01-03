@@ -72,7 +72,7 @@ class StatusAnimationXO{
       return CONTINUE;
 
     switch(xo){
-      case 11:
+      case 0:
         if(status == Winner.LINE_ONE_VERTICAL ||
             status == Winner.LINE_ONE_HORIZONTAL ||
             status == Winner.DIAGONAL)
@@ -80,14 +80,14 @@ class StatusAnimationXO{
         else
           return OPACITY;
         break;
-      case 12:
+      case 1:
         if(status == Winner.LINE_TWO_VERTICAL ||
             status == Winner.LINE_ONE_HORIZONTAL)
           return SIZE_OUT;
         else
           return OPACITY;
         break;
-      case 13:
+      case 2:
         if(status == Winner.LINE_THREE_VERTICAL ||
             status == Winner.LINE_ONE_HORIZONTAL ||
             status == Winner.ANTI_DIAGONAL)
@@ -95,14 +95,14 @@ class StatusAnimationXO{
         else
           return OPACITY;
         break;
-      case 21:
+      case 10:
         if(status == Winner.LINE_ONE_VERTICAL ||
             status == Winner.LINE_TWO_HORIZONTAL)
           return SIZE_OUT;
         else
           return OPACITY;
         break;
-      case 22:
+      case 11:
         if(status == Winner.LINE_TWO_VERTICAL ||
             status == Winner.LINE_TWO_HORIZONTAL ||
             status == Winner.DIAGONAL ||
@@ -111,14 +111,14 @@ class StatusAnimationXO{
         else
           return OPACITY;
         break;
-      case 23:
+      case 12:
         if(status == Winner.LINE_THREE_VERTICAL ||
             status == Winner.LINE_TWO_HORIZONTAL)
           return SIZE_OUT;
         else
           return OPACITY;
         break;
-      case 31:
+      case 20:
         if(status == Winner.LINE_ONE_VERTICAL ||
             status == Winner.LINE_THREE_HORIZONTAL ||
             status == Winner.ANTI_DIAGONAL)
@@ -126,14 +126,14 @@ class StatusAnimationXO{
         else
           return OPACITY;
         break;
-      case 32:
+      case 21:
         if(status == Winner.LINE_TWO_VERTICAL ||
             status == Winner.LINE_THREE_HORIZONTAL)
           return SIZE_OUT;
         else
           return OPACITY;
         break;
-      case 33:
+      case 22:
         if(status == Winner.LINE_THREE_VERTICAL ||
             status == Winner.LINE_THREE_HORIZONTAL ||
             status == Winner.DIAGONAL)
