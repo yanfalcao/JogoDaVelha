@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:jogo_da_idosa/shape/PlayerText.dart';
-import 'package:jogo_da_idosa/color/ColorsApp.dart';
+import 'package:jogo_da_idosa/fonts/color/ColorsApp.dart';
 import 'package:jogo_da_idosa/shape/ShapesGame.dart';
 import 'Win.dart';
 import 'controller/MatrixState.dart';
@@ -122,6 +122,7 @@ class GameIteractiveState extends State<GameIteractive> with SingleTickerProvide
     if(_statusGame != Winner.CONTINUE && _statusGame != Winner.NOBODY){
       if(!stop)
         playerTurn = playerTurn ? false : true;
+
       stop = true;
     }
   }
@@ -142,7 +143,6 @@ class GameIteractiveState extends State<GameIteractive> with SingleTickerProvide
   }
 
   Widget _XO(Alignment alignment, int x, int y){
-    double size = state.getState(x, y) == 1 ? 100:80; // 120 : 100
     int position = int.parse(x.toString() + y.toString());
 
     if(StatusAnimationXO.getStatus(_statusGame, position) == StatusAnimationXO.OPACITY){
@@ -155,7 +155,7 @@ class GameIteractiveState extends State<GameIteractive> with SingleTickerProvide
       child: IconButton(
         icon: state.getState(x, y) == 1 ? Icon(Icons.close):Icon(Icons.panorama_fish_eye),
         color: state.getColor(x, y),
-        iconSize: size,
+        iconSize: state.getState(x, y) == 1 ? 100:80,
         onPressed: (){
           setState(() {
             _toggleTurn(x, y);

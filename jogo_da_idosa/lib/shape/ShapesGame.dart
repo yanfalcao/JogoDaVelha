@@ -2,7 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'package:jogo_da_idosa/color/ColorsApp.dart';
+import 'package:jogo_da_idosa/fonts/color/ColorsApp.dart';
 
 class ShapePlay extends CustomPainter {
   double _fraction;

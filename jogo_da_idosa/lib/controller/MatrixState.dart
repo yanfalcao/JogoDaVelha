@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jogo_da_idosa/color/ColorsApp.dart';
+import 'package:jogo_da_idosa/fonts/color/ColorsApp.dart';
 
 class MatrixState {
     List<List<int>> _matrix = new List<List<int>>();
@@ -31,5 +31,14 @@ class MatrixState {
 
     void setColor(int x, int y, Color color){
         _matrixColor[x][y] = color;
+    }
+
+    void reestart(){
+        for (var i = 0; i < 3; i++) {
+            for (var j = 0; j < 3; j++) {
+                setState(i, j, 0);
+                setColor(i, j, Transparent());
+            }
+        }
     }
 }
