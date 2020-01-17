@@ -1,5 +1,7 @@
+import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:jogo_da_idosa/fonts/flare/FireworkAnimation.dart';
 import 'package:jogo_da_idosa/shape/PlayerText.dart';
 import 'package:jogo_da_idosa/fonts/color/ColorsApp.dart';
 import 'package:jogo_da_idosa/shape/ShapesGame.dart';
@@ -41,6 +43,8 @@ class GameIteractiveState extends State<GameIteractive> with SingleTickerProvide
   double _fraction;
   double _fractionOpacity;
 
+  FireworkAnimation fireworkAnimation = new FireworkAnimation();
+
   @override
   void initState() {
     super.initState();
@@ -81,6 +85,8 @@ class GameIteractiveState extends State<GameIteractive> with SingleTickerProvide
         painter: ShapePlay(_fraction),
         child: Stack(
           children: <Widget>[
+            fireworkAnimation.playerOne(),
+            fireworkAnimation.playerTwo(),
             PlayerTwoText(playerTurn),
             PlayerOneText(playerTurn, _fraction),
             _XO(Alignment(_xPosition(0, 0), -0.41), 0, 0),  // XO 1 1
@@ -122,6 +128,8 @@ class GameIteractiveState extends State<GameIteractive> with SingleTickerProvide
     if(_statusGame != Winner.CONTINUE && _statusGame != Winner.NOBODY){
       if(!stop)
         playerTurn = playerTurn ? false : true;
+
+      playerTurn ? fireworkAnimation.playfireworkPlayerOne() : fireworkAnimation.playfireworkPlayerTwo();
 
       stop = true;
     }
