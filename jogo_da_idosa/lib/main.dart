@@ -1,4 +1,3 @@
-import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:jogo_da_idosa/fonts/flare/FireworkAnimation.dart';
@@ -124,13 +123,18 @@ class GameIteractiveState extends State<GameIteractive> with SingleTickerProvide
         controller.reset();
         controller.forward();
       }
+    }else{
+      controller.reset();
+      _statusGame = Winner.CONTINUE;
+      state.reestart();
+      stop = false;
     }
+
     if(_statusGame != Winner.CONTINUE && _statusGame != Winner.NOBODY){
       if(!stop)
         playerTurn = playerTurn ? false : true;
 
       playerTurn ? fireworkAnimation.playfireworkPlayerOne() : fireworkAnimation.playfireworkPlayerTwo();
-
       stop = true;
     }
   }
@@ -156,6 +160,14 @@ class GameIteractiveState extends State<GameIteractive> with SingleTickerProvide
     if(StatusAnimationXO.getStatus(_statusGame, position) == StatusAnimationXO.OPACITY){
       if(state.getColor(x, y).value != Transparent().value)
         state.setColor(x, y, EditTransparent(_fractionOpacity));
+      else{
+        if(_statusGame == Winner.NOBODY){
+          controller.reset();
+          state.reestart();
+          _statusGame = Winner.CONTINUE;
+          stop = false;
+        }
+      }
     }
 
     return Align(
