@@ -21,7 +21,7 @@ O jogo é para ser jogado com duas pessoas com o celular de frente uma para a ou
 
 ## Aplicação
 
-<img src="https://i.imgur.com/LsvgaAb.gif" width="30%"/>
+<img src="https://i.imgur.com/oSzLeJo.gif" width="30%"/>
 
 ## Ferramentas
 
