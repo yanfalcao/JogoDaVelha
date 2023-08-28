@@ -13,26 +13,26 @@
 <a href="https://www.repostatus.org/#unsupported"><img src="https://www.repostatus.org/badges/latest/unsupported.svg" alt="Project Status: Unsupported – The project has reached a stable, usable state but the author(s) have ceased all work on it. A new maintainer may be desired." /></a>  
 </p>
 
-## **Descrição**
+## **Description**
 
-Um dos primeiros aplicativos feitos em Flutter para treinar a construção de layouts e animações. O aplicativo é um jogo da velha comum, com um layout minimalista e a com algumas animações.
+One of the first apps created in Flutter to practice building layouts and animations. The app is a typical Tic-Tac-Toe game with a minimalist layout and a few animations.
 
-O jogo é para ser jogado com duas pessoas com o celular de frente uma para a outra, em caso de vitoria uma animação é feita deixando só a linha com a jogada vencedora é uma animação de fogos de artificio, para recomeçar é só clicar novamente na tela. E em caso de nenhum dos dois vencerem o X a O são apagados com uma animação.
+The game is meant to be played by two people facing each other with their phones. In case of a victory, an animation highlights the winning move with fireworks, and to restart the game, you simply tap the screen again. If neither player wins, an animation clears the X and O marks.
 
-## Aplicação
+## Application
 
 <img src="https://i.imgur.com/oSzLeJo.gif" width="30%"/>
 
-## Ferramentas
+## Tools
 
 <a href="https://flutter.dev/" target="_blank"> <img src="https://cdn.iconscout.com/icon/free/png-256/flutter-2038877-1720090.png" alt="Flutter" width="40" height="40"/> </a>
 <a href="https://dart.dev/" target="_blank"> <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Dart-logo-icon.svg/2048px-Dart-logo-icon.svg.png" alt="Dart" width="40" height="40"/> </a> 
 <a href="https://developer.android.com/studio" target="_blank"> <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Android_Studio_Icon_%282014-2019%29.svg/1200px-Android_Studio_Icon_%282014-2019%29.svg.png" alt="androidStudio" width="40" height="40"/>
 
-## Como usar
+## How to Use
 
   ```
-   Primeiramente, configure corretamente o ambiente de desenvolvimento Flutter em sua maquina, veja https://flutter.dev/docs/get-started/install
+   Firstly, set up the Flutter development environment on your machine correctly, see https://flutter.dev/docs/get-started/install
    
    - Clone this repository:
    $ git clone https://github.com/yanfalcao/JogoDaVelha.git
@@ -44,7 +44,7 @@ O jogo é para ser jogado com duas pessoas com o celular de frente uma para a ou
    $ flutter run
   ```
   
-## Desenvolvedor
+## Developer
 
 | ![Yan Falcão](https://avatars.githubusercontent.com/u/33384608?s=150&u=e409234f3e92d08fdf5427560d3181c690ceb86f&v=4)|
 |:---------------------:|
